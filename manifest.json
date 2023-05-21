@@ -1,11 +1,11 @@
 {
-	"id": "obsidian-sample-plugin",
-	"name": "Sample Plugin",
+	"id": "obsidian-airgap",
+	"name": "Airgap",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Link to your personal Obsidian vault notes without sharing your data.",
+	"author": "Alexis Rondeau",
+	"authorUrl": "https://alexisrondeau.me",
+	"fundingUrl": "https://alexisrondeau.me",
 	"isDesktopOnly": false
 }
