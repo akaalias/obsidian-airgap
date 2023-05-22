@@ -3,9 +3,9 @@
 	"name": "Airgap",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Link to your personal Obsidian vault notes without sharing your data.",
+	"description": "Link to notes in a different vault without sharing your data.",
 	"author": "Alexis Rondeau",
 	"authorUrl": "https://alexisrondeau.me",
 	"fundingUrl": "https://alexisrondeau.me",
-	"isDesktopOnly": false
+	"isDesktopOnly": true
 }

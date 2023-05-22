@@ -15,8 +15,8 @@ export default class AirgapPlugin extends Plugin {
 			if (evt.key == "{" && evt.shiftKey && this.lastKey == "{") {
 				// Show search modal
 				let modal = new AirgapSuggestModal(this.app);
-				modal.emptyStateText = "Type to search for a note"
-				modal.setPlaceholder("Search for a note")
+				modal.emptyStateText = "Type to search for a note in the airgapped vault"
+				modal.setPlaceholder("Search here...")
 				modal.plugin = this;
 				modal.open();
 			}
@@ -109,14 +109,33 @@ export class AirgapSettingTab extends PluginSettingTab {
 	display(): void {
 		let { containerEl } = this;
 		
-		containerEl.empty();
 		
+		containerEl.empty();
+
+		containerEl.createEl("h3", {text: "Obsidian Airgap Settings"});
+
+		containerEl.createEl("p", {text: "This plugin allows you to link to notes in an airgapped vault. This is useful if you want to link to ideas from one vault while working in a different one without the danger of mixing up the two."});
+
+		containerEl.createEl("h2", {text: "Preparation"});
+
+		containerEl.createEl("p", {text: "To use this plugin, you must first create a list of all note titles in your airgapped vault."});
+
+		containerEl.createEl("p", {text: "1. To do this, open the vault whose notes you want to link to but keep airgapped."});
+
+		containerEl.createEl("p", {text: "2. Search for \"Insert list of note titles\" using the command-palette, then run it."});
+
+		containerEl.createEl("p", {text: "3. Copy this list and paste it into the \"Airgapped Titles List\" setting below."});
+
+		containerEl.createEl("h2", {text: "Usage"});
+
+		containerEl.createEl("p", {text: "To link from your current to a note in the airgapped vault, type \"{{\". This will trigger the search and a list of suggestions will appear. Select the note you want to link to and press enter. The link will be inserted into your note. The link will be marked as an airgapped link using the indicator you set below."});
+
 		new Setting(containerEl)
-		.setName("Basenames")
-		.setDesc("A list of all note basenames")
+		.setName("Airgapped Note List")
+		.setDesc("A list of all note titles located in your airgapped vault. This is used to provide suggestions when searching for a note. ")
 		.addTextArea((text) =>
 		text
-		.setPlaceholder("Enter basenames")
+		.setPlaceholder("Enter Note Titles")
 		.setValue(this.plugin.settings.basenames)
 		.onChange(async (value) => {
 			this.plugin.settings.basenames = value;
@@ -125,11 +144,11 @@ export class AirgapSettingTab extends PluginSettingTab {
 		);
 
 		new Setting(containerEl)
-		.setName("Vault Indicator")
-		.setDesc("The string to be used to indicate that a note is in the airgapped vault")
+		.setName("Airgap Indicator")
+		.setDesc("The string to be used to indicate that a link is to a note in the airgapped vault.")
 		.addText((text) =>
 		text
-		.setPlaceholder("Enter vault indicator")
+		.setPlaceholder("Enter a vault indicator")
 		.setValue(this.plugin.settings.vaultIndicator)
 		.onChange(async (value) => {
 			this.plugin.settings.vaultIndicator = value;
