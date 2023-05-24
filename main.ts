@@ -14,7 +14,7 @@ export default class AirgapPlugin extends Plugin {
 			// if event is "{" and shift is pressed and the last key pressed was also "{" then alert "Hello!"
 			if (evt.key == "{" && evt.shiftKey && this.lastKey == "{") {
 				// Show search modal
-				let modal = new AirgapSuggestModal(this.app);
+				let modal = new AirgapSuggestModal(this.app, this);
 				modal.emptyStateText = "Type to search for a note in the airgapped vault"
 				modal.setPlaceholder("Search here...")
 				modal.plugin = this;
@@ -61,15 +61,20 @@ const DEFAULT_SETTINGS: AirgapSettings = {
 
 export class AirgapSuggestModal extends SuggestModal<String> {
 	plugin: AirgapPlugin;
-	
+	basenames: string[];
+
+	constructor(app: App, plugin: AirgapPlugin) {
+		super(app);
+		this.plugin = plugin;
+		this.basenames = this.plugin.settings.basenames.split("\n");
+	}
+
 	// Returns all available suggestions.
 	getSuggestions(query: string): string[] {
-		if (query.length < 3) {
-			return []
-		}
-		return this.plugin.settings.basenames.split("\n").filter((basename: string) =>
-		basename.toLowerCase().includes(query.toLowerCase())
-		);
+		if(query.length == 0) return [];
+		return this.basenames.filter((basename: string) =>
+			basename.toLowerCase().includes(query.toLowerCase())
+		).slice(0, 5);
 	}
 	
 	// Renders each suggestion item.
