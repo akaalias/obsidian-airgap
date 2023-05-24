@@ -12,4 +12,4 @@ read MESSAGE
 echo $MESSAGE
 git add -A
 git commit -m $MESSAGE
-git push origin main
+git push origin master
