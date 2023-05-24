@@ -1,7 +1,7 @@
 {
 	"id": "obsidian-airgap",
 	"name": "Airgap",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "Link to notes in a different vault without sharing your data.",
 	"author": "Alexis Rondeau",
